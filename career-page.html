@@ -53,15 +53,15 @@
         <!-- Uncomment below if you prefer to use text as a logo -->
         <h1 class="logo mr-auto"><a href="index.html">Future World</a></h1>
 
-        <nav class="nav-menu d-none d-lg-block">
+        <!-- <nav class="nav-menu d-none d-lg-block">
           <ul>
             <li class="active"><a href="index.html">Home</a></li>
             <li><a href="/index.html#about">About</a></li>
-            <!-- <li><a href="#services">Services</a></li> -->
-            <li class="drop-down">
+             <li><a href="#services">Services</a></li> -->
+            <!-- <li class="drop-down">
               <a href="/index.html#services">Services</a>
               <ul>
-                <li><a href="/index.html#portfolio">Industry FootPrint</a></li>
+                <li><a href="/index.html#portfolio">Industry FootPrint</a></li> --> 
                 <!-- <li class="drop-down">
                 <a href="#">Deep Drop Down</a>
                 <ul>
@@ -75,13 +75,13 @@
                 <!-- <li><a href="#">Drop Down 2</a></li>
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li> -->
-              </ul>
-            </li>
+              <!-- </ul>
+            </li> -->
             <!-- <li><a href="/enquiry-page.html">Enquiry</a></li>
             <li><a href="/career-page.html">Career</a></li>
             <li><a href="/index.html#contact">Contact Us</a></li> -->
-          </ul>
-        </nav>
+          <!-- </ul>
+        </nav> -->
         <!-- .nav-menu -->
       </div>
     </header>
@@ -101,88 +101,76 @@
         </div>
       </section>
       <!-- End Breadcrumbs -->
+       <div class="container-fluid">
+        <div class="row career">
+          <div class="col-lg-6 p-5 ">
+            <h1>Career with us</h1>
+            <p>Future World is an established IT consultancy services company
+              which is powered by a team of seasoned professionals and driven
+              by its proven track record in providing consultants with
+              experience in some of the most advanced technologies. Our
+              talisman is our pool of IT consultants backed by a portfolio
+              which includes assignments with Fortune 500 companies and other
+              blue chip corporations.In the IT industry, a vast number of
+              companies are constantly being affected by issues concerned with
+              consultancy. Hiring poorly vetted consultants leads to
+              operational failures, inconsistencies, and can cause heavy
+              losses for any company in the long run.</p>
+          </div>
+          <div class="col-lg-6 d-flex justify-content-center text-center">
+            <div class="card h-100 w-100 mb-3" style=" border: none;">
+              <div class="row no-gutters">
+                <!-- <div class="col-md-4">
+                  <img src="https://images.unsplash.com/photo-1575903013621-1387ce8caa74?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" class="card-img" alt="...">
+                </div> -->
+                <div class="col-md-12">
+                  <div class="card-body">
+                    <h5 class="card-title mb-4">Apply Here!</h5>
+                    <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                    <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                    <form>
+                      <div class="form-row mb-2 mt-2">
+                        <div class="col-6">
+                          <input type="text" class="form-control" placeholder="First Name*">
+                        </div>
+                        <div class="col-6">
+                          <input type="text" class="form-control" placeholder="Last Name*">
+                        </div>
+                      </div>
+                      <div class="form-row mb-2 mt-2">
+                        <div class="col-6">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroupPrepend">@</span>
+                            </div>
+                            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                            <div class="invalid-feedback">
+                              Please enter a valid email.
+                            </div>
+                          </div>
+                        </div>
 
-      <section class="inner-page testimonials">
-        <div class="container text-center">
-          <div class="col-lg-8 mt-5 mt-lg-0">
-            <form
-              action="forms/contact.php"
-              method="post"
-              role="form"
-              class="php-email-form"
-            >
-              <div class="form-row">
-                <div class="col-md-6 form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    id="name"
-                    placeholder="Your Name"
-                    data-rule="minlen:4"
-                    data-msg="Please enter at least 4 chars"
-                  />
-                  <div class="validate"></div>
-                </div>
-                <div class="col-md-6 form-group">
-                  <input
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    id="email"
-                    placeholder="Your Email"
-                    data-rule="email"
-                    data-msg="Please enter a valid email"
-                  />
-                  <div class="validate"></div>
+                      </div>
+
+                      <div class="form-row mb-4 mt-2">
+                        <div class="col-6">
+                          <input type="text" class="form-control" placeholder="City">
+                        </div>
+                        <div class="col-6">
+                          <input type="text" class="form-control" placeholder="State">
+                        </div>
+                      </div>
+                          <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                    
+                  </div>
                 </div>
               </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="subject"
-                  id="subject"
-                  placeholder="Subject"
-                  data-rule="minlen:4"
-                  data-msg="Please enter at least 8 chars of subject"
-                />
-                
-              </div>
-              <div class="input-group mb-3">
-                <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile02">
-                  <label class="custom-file-label" for="inputGroupFile02">Choose file (Resume)</label>
-                </div>
-                <div class="input-group-append">
-                  <span class="input-group-text" id="">Upload</span>
-                </div>
-              </div>
-              <div class="form-group">
-                <textarea
-                  class="form-control"
-                  name="message"
-                  rows="5"
-                  data-rule="required"
-                  data-msg="Please write something for us"
-                  placeholder="Message"
-                ></textarea>
-                <!-- <div class="validate"></div> -->
-              </div>
-              <!-- <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">
-                  Your message has been sent. Thank you!
-                </div>
-              </div> -->
-              <div>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-              </div>
-            </form>
+            </div>  
           </div>
         </div>
-      </section>
+       </div>
+      
     </main>
     <!-- End #main -->
 
@@ -259,7 +247,7 @@
 
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social Networks</h4>
-              <p>
+              <p >
                 Cras fermentum odio eu feugiat lide par naso tierra videa magna
                 derita valies
               </p>
