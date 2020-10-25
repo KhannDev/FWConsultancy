@@ -327,6 +327,10 @@ h6 {
 /* #hero .container {
   padding-top: 60px; 
 } */
+.justice{
+  text-align: justify;
+  text-justify: inter-word;
+}
 
 .box:after {
   content: '';
