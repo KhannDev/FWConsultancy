@@ -63,25 +63,22 @@
               <a href="#"><i class="fas fa-users"></i> About Us</a>
               <ul>
                 <li><a href="/index.html#about">Why People Choose Us?</a></li>
-                <li><a href="/index.html#team">Our Team</a></li>
               </ul>
             </li>
             <li class="drop-down">
-              <a href="#"><i class="fas fa-cogs"></i> Services</a>
+              <a href="#services"><i class="fas fa-cogs"></i> Services</a>
               <ul>
                 <li>
-                  <a href="/index.html#services">IT Services and Consulting</a>
+                  <a href="servicetemplate.html">IT Services and Consulting</a>
                 </li>
                 <li>
-                  <a href="/index.html#services"
-                    >Career Development and Training</a
-                  >
+                  <a href="career.html">Career Development and Training</a>
                 </li>
                 <li>
-                  <a href="/index.html#services">Innovative Workforce</a>
+                  <a href="innovative.html">Innovative Workforce</a>
                 </li>
                 <li>
-                  <a href="/index.html#services">Contract Staffing</a>
+                  <a href="contract.html">Contract Staffing</a>
                 </li>
               </ul>
             </li>
@@ -152,6 +149,7 @@
                             type="text"
                             class="form-control"
                             placeholder="First Name*"
+                            required
                           />
                         </div>
                         <div class="col-6">
@@ -159,6 +157,7 @@
                             type="text"
                             class="form-control"
                             placeholder="Last Name*"
+                            required
                           />
                         </div>
                       </div>
@@ -180,19 +179,24 @@
                       </div>
                       <div class="form-row mb-2 mt-2 p-2">
                         <div class="col-12">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Aadhaar / PAN No*"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="form-row mb-2 mt-2 p-2">
+                        <div class="col-12">
                           <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span
-                                class="input-group-text"
-                                id="inputGroupPrepend"
-                                >@</span
-                              >
-                            </div>
                             <input
-                              placeholder="Email"
-                              type="text"
+                              placeholder="Email*"
                               class="form-control"
-                              id="validationCustomUsername"
+                              type="email"
+                              id="email"
+                              name="email"
+                              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                               aria-describedby="inputGroupPrepend"
                               required
                             />
@@ -219,22 +223,21 @@
 
                       <div class="form-row mb-2 mt-2 p-2">
                         <div class="col-12">
-                          <div class="input-group">
-                            <div class="custom-file">
-                              <input
-                                type="file"
-                                class="custom-file-input"
-                                id="inputGroupFile01"
-                              />
-                              <label
-                                class="custom-file-label"
-                                for="inputGroupFile01"
-                                >Upload Resume</label
-                              >
-                            </div>
+                          <div class="custom-file mb-3">
+                            <input
+                              type="file"
+                              class="custom-file-input"
+                              id="customFile"
+                              name="filename"
+                            />
+                            <label
+                              class="custom-file-label"
+                              for="customFile"
+                            ></label>
                           </div>
                         </div>
                       </div>
+
                       <button
                         type="submit"
                         class="btn btn-primary"
@@ -292,14 +295,14 @@
                   <i class="bx bx-chevron-right"></i>
                   <a href="/index.html">Services</a>
                 </li>
-                <li>
+                <!-- <li>
                   <i class="bx bx-chevron-right"></i>
                   <a href="/index.html">Terms of service</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
                   <a href="/index.html">Privacy policy</a>
-                </li>
+                </li> -->
               </ul>
             </div>
 
@@ -307,42 +310,33 @@
               <h4>Our Services</h4>
               <ul>
                 <li>
-                  <i class="bx bx-chevron-right"></i> <a href="#">Web Design</a>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="servicetemplate.html">IT Services & Consulting</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="servicetemplate.html">Web Development</a>
+                  <a href="career.html">Career Development and Training</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="servicetemplate.html">Product Management</a>
+                  <a href="innovative.html">Innovative Workforce Solutions</a>
                 </li>
                 <li>
                   <i class="bx bx-chevron-right"></i>
-                  <a href="servicetemplate.html">Marketing</a>
-                </li>
-                <li>
-                  <i class="bx bx-chevron-right"></i>
-                  <a href="servicetemplate.html">Graphic Design</a>
+                  <a href="contract.html">Contract Staffing</a>
                 </li>
               </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 footer-links">
               <h4>Our Social Networks</h4>
-              <p>
-                Cras fermentum odio eu feugiat lide par naso tierra videa magna
-                derita valies
-              </p>
+              <p></p>
               <div class="social-links mt-3">
                 <a
                   href="https://www.facebook.com/Future-World-Consultancy-1403705463193666/"
                   target="_blank"
                   class="facebook"
                   ><i class="bx bxl-facebook"></i
-                ></a>
-                <a href="#" class="instagram"
-                  ><i class="bx bxl-instagram"></i
                 ></a>
 
                 <a
@@ -362,6 +356,16 @@
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
     <!-- Vendor JS Files -->
+    <script>
+      // Add the following code if you want the name of the file appear on select
+      $('.custom-file-input').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this)
+          .siblings('.custom-file-label')
+          .addClass('selected')
+          .html(fileName);
+      });
+    </script>
     <script
       src="https://kit.fontawesome.com/5296c64322.js"
       crossorigin="anonymous"
