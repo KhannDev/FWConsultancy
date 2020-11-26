@@ -327,7 +327,7 @@ h6 {
 /* #hero .container {
   padding-top: 60px; 
 } */
-.justice{
+.justice {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -747,7 +747,7 @@ section {
   font-size: 30px;
   font-weight: 700;
   display: block;
-  color: #3E92CE;
+  color: #3e92ce;
   font-family: 'Dosis', sans-serif;
 }
 
@@ -1045,10 +1045,11 @@ section {
 --------------------------------------------------------------*/
 .portfolio .portfolio-item {
   margin-bottom: 30px;
-  /* color: #000; */
+  color: #000;
 }
 .portfolio h1,
 h2,
+h4,
 p {
   color: #000;
 }
