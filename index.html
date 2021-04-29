@@ -1598,10 +1598,7 @@
 
             <div class="col-lg-8 mt-5 mt-lg-0">
               <form
-                action="forms/contact.php"
-                method="post"
-                role="form"
-                class="php-email-form"
+              id="contactForm"
               >
                 <div class="form-row text-center">
                   <div class="col-md-6 form-group">
@@ -1611,6 +1608,7 @@
                       class="form-control"
                       id="name"
                       placeholder="Your Name"
+                      required
                       data-rule="minlen:4"
                       data-msg="Please enter at least 4 chars"
                     />
@@ -1623,6 +1621,7 @@
                       name="email"
                       id="email"
                       placeholder="Your Email"
+                      required
                       data-rule="email"
                       data-msg="Please enter a valid email"
                     />
@@ -1635,6 +1634,7 @@
                     class="form-control"
                     name="subject"
                     id="subject"
+                    required
                     placeholder="Subject"
                     data-rule="minlen:4"
                     data-msg="Please enter at least 8 chars of subject"
@@ -1646,21 +1646,16 @@
                     class="form-control"
                     name="message"
                     rows="5"
+                    id="message"
+                    required
                     data-rule="required"
                     data-msg="Please write something for us"
                     placeholder="Message"
                   ></textarea>
                   <div class="validate"></div>
                 </div>
-                <div class="mb-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">
-                    Your message has been sent. Thank you!
-                  </div>
-                </div>
                 <div class="text-center">
-                  <button type="submit">Send Message</button>
+                  <button type="submit" id="send-button" class="btn btn-dark">Send Message</button>
                 </div>
               </form>
             </div>
@@ -1768,6 +1763,7 @@ Jayanagar, 9th Block, Bangalore- 560 011<br />
 
     <script src="assets/vendor/jquery/jquery.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/axios/axios.min.js"></script>
     <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
     <script src="assets/vendor/venobox/venobox.min.js"></script>
@@ -1778,5 +1774,52 @@ Jayanagar, 9th Block, Bangalore- 560 011<br />
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      $("#contactForm").on('submit', async function (e) {
+        e.preventDefault();
+        $("#send-button").removeClass("btn-dark");
+        $("#send-button").text('Sending...');
+        $("#send-button").addClass("btn-info");
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        const body = {name, email, subject, message};
+        try {
+        const response = await axios.post('https://app.fwc.co.in/api/landing/contact-us', body);
+        if(response.status === 200) {
+          $("#send-button").removeClass("btn-info");
+          $("#send-button").text('Successfully Sent');
+          $("#send-button").addClass("btn-success");
+        } else {
+          $("#send-button").removeClass("btn-info");
+          $("#send-button").text('Error, try later');
+          $("#send-button").addClass("btn-danger");
+        }
+        } catch(e) {
+          $("#send-button").removeClass("btn-info");
+          $("#send-button").text('Server Error');
+          $("#send-button").addClass("btn-danger");
+        }
+          clearInput();
+
+        const timer = setTimeout(() => {
+          $("#send-button").removeClass("btn-danger");
+          $("#send-button").removeClass("btn-success");
+          $("#send-button").text('Send Message');
+          $("#send-button").addClass("btn-dark");
+          clearTimeout(timer);
+        }, 3000);
+
+      });
+
+      const clearInput = () => {
+       document.getElementById('name').value = '';
+       document.getElementById('email').value = '';
+       document.getElementById('subject').value = '';
+       document.getElementById('message').value = '';
+      }
+    </script>
   </body>
 </html>
