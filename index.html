@@ -1777,6 +1777,7 @@ Jayanagar, 9th Block, Bangalore- 560 011<br />
     <script>
       $("#contactForm").on('submit', async function (e) {
         e.preventDefault();
+        document.getElementById('send-button').disabled = true;
         $("#send-button").removeClass("btn-dark");
         $("#send-button").text('Sending...');
         $("#send-button").addClass("btn-info");
@@ -1809,6 +1810,7 @@ Jayanagar, 9th Block, Bangalore- 560 011<br />
           $("#send-button").removeClass("btn-success");
           $("#send-button").text('Send Message');
           $("#send-button").addClass("btn-dark");
+        document.getElementById('send-button').disabled = false;
           clearTimeout(timer);
         }, 3000);
 
