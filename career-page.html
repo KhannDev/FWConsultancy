@@ -628,17 +628,54 @@ Some text
         const message = document.getElementById("message").value;
         const file = document.getElementById("file").files[0];
 
-        console.log(
-          firstName,
-          lastName,
-          city,
-          state,
-          adhaar,
-          email,
-          message,
-          file
-        );
+        const fileUrl = '';
+
+        // Upload file to get file url
+
+
+
+        const body = {firstName, lastName, city, state, adhaar, email, message, fileUrl};
+        try {
+          const response = await axios.post(
+            "https://app.fwc.co.in/api/landing/careers",
+            body
+          );
+          if (response.status === 200) {
+            $("#send-button").removeClass("btn-info");
+            $("#send-button").text("Successfully Sent");
+            $("#send-button").addClass("btn-success");
+          } else {
+            $("#send-button").removeClass("btn-info");
+            $("#send-button").text("Error, try later");
+            $("#send-button").addClass("btn-danger");
+          }
+        } catch (e) {
+          $("#send-button").removeClass("btn-info");
+          $("#send-button").text("Server Error");
+          $("#send-button").addClass("btn-danger");
+        }
+        clearInput();
+
+        const timer = setTimeout(() => {
+          $("#send-button").removeClass("btn-danger");
+          $("#send-button").removeClass("btn-success");
+          $("#send-button").text("Send Message");
+          $("#send-button").addClass("btn-dark");
+          document.getElementById("send-button").disabled = false;
+          clearTimeout(timer);
+        }, 3000);
       });
+
+      const clearInput = () => {
+       document.getElementById("first-name").value = '';
+       document.getElementById("last-name").value = '';
+       document.getElementById("city").value = '';
+       document.getElementById("state").value = '';
+       document.getElementById("adhaar").value = '';
+       document.getElementById("email").value = '';
+       document.getElementById("message").value = '';
+       document.getElementById("file").value = '';
+      };
 
       const openModal = (id) => {
         const jobs = response.data.data;
