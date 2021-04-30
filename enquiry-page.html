@@ -158,19 +158,23 @@
                     <h5 class="card-title mb-4">Enquire Now/Request Now!</h5>
                     <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
                     <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                    <form>
+                    <form id="enquiryForm">
                       <div class="form-row mb-2 mt-2 p-2">
                         <div class="col-6">
                           <input
                             type="text"
                             class="form-control"
                             placeholder="First Name*"
+                            id="first-name"
+                            required
                           />
                         </div>
                         <div class="col-6">
                           <input
                             type="text"
                             class="form-control"
+                            id="last-name"
+                            required
                             placeholder="Last Name*"
                           />
                         </div>
@@ -189,7 +193,7 @@
                               placeholder="email"
                               type="text"
                               class="form-control"
-                              id="validationCustomUsername"
+                              id="email"
                               aria-describedby="inputGroupPrepend"
                               required
                             />
@@ -203,6 +207,8 @@
                             type="text"
                             class="form-control"
                             placeholder="Phone*"
+                            id="phone"
+                            required
                           />
                         </div>
                       </div>
@@ -211,6 +217,8 @@
                           <input
                             type="text"
                             class="form-control"
+                            id="company"
+                            required
                             placeholder="Company*"
                           />
                         </div>
@@ -222,6 +230,8 @@
                             type="text"
                             class="form-control"
                             placeholder="City"
+                            id="city"
+                            required
                           />
                         </div>
                         <div class="col-6">
@@ -229,6 +239,8 @@
                             type="text"
                             class="form-control"
                             placeholder="State"
+                            id="state"
+                            required
                           />
                         </div>
                       </div>
@@ -239,7 +251,7 @@
                             <textarea
                               class="form-control"
                               placeholder="Message*"
-                              id="validationCustomUsername"
+                              id="message"
                               aria-describedby="inputGroupPrepend"
                               required
                             ></textarea>
@@ -249,8 +261,8 @@
 
                       <button
                         type="submit"
-                        class="btn btn-primary"
-                        style="background: black"
+                        class="btn btn-dark"
+                        id="send-button"
                       >
                         Send Message
                       </button>
@@ -369,6 +381,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/axios/axios.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
@@ -380,5 +393,73 @@
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
+    <script>
+      $("#enquiryForm").on("submit", async function (e) {
+        e.preventDefault();
+        document.getElementById("send-button").disabled = true;
+        $("#send-button").removeClass("btn-dark");
+        $("#send-button").text("Sending...");
+        $("#send-button").addClass("btn-info");
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const company = document.getElementById("company").value;
+        const city = document.getElementById("city").value;
+        const message = document.getElementById("message").value;
+        const state = document.getElementById("state").value;
+
+        const body = {
+          firstName,
+          lastName,
+          email,
+          phone,
+          company,
+          city,
+          message,
+          state,
+        };
+        try {
+          const response = await axios.post(
+            "https://app.fwc.co.in/api/landing/enquiries",
+            body
+          );
+          if (response.status === 200) {
+            $("#send-button").removeClass("btn-info");
+            $("#send-button").text("Successfully Sent");
+            $("#send-button").addClass("btn-success");
+          } else {
+            $("#send-button").removeClass("btn-info");
+            $("#send-button").text("Error, try later");
+            $("#send-button").addClass("btn-danger");
+          }
+        } catch (e) {
+          $("#send-button").removeClass("btn-info");
+          $("#send-button").text("Server Error");
+          $("#send-button").addClass("btn-danger");
+        }
+        clearInput();
+
+        const timer = setTimeout(() => {
+          $("#send-button").removeClass("btn-danger");
+          $("#send-button").removeClass("btn-success");
+          $("#send-button").text("Send Message");
+          $("#send-button").addClass("btn-dark");
+          document.getElementById("send-button").disabled = false;
+          clearTimeout(timer);
+        }, 3000);
+      });
+
+      const clearInput = () => {
+        document.getElementById("first-name").value = "";
+        document.getElementById("last-name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("company").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("message").value = "";
+        document.getElementById("state").value = "";
+      };
+    </script>
   </body>
 </html>
