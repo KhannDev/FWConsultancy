@@ -215,7 +215,7 @@
                             class="form-control"
                             placeholder="First Name*"
                             id="first-name"
-                            value="Ankit"
+                            value=""
                             required
                           />
                         </div>
@@ -225,7 +225,7 @@
                             class="form-control"
                             placeholder="Last Name*"
                             id="last-name"
-                            value="Negi"
+                            value=""
                             required
                           />
                         </div>
@@ -255,7 +255,7 @@
                             class="form-control"
                             placeholder="Aadhaar"
                             id="adhaar"
-                            value="893918383198319"
+                            value=""
                             required
                           />
                         </div>
@@ -269,7 +269,7 @@
                               type="email"
                               id="email"
                               name="email"
-                              value="ankit@gmail.com"
+                              value=""
                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                               aria-describedby="inputGroupPrepend"
                               required
@@ -290,9 +290,7 @@
                               id="message"
                               aria-describedby="inputGroupPrepend"
                               required
-                            >
-Some text
-                            </textarea>
+                            ></textarea>
                           </div>
                         </div>
                       </div>
@@ -335,8 +333,8 @@ Some text
 
                       <button
                         type="submit"
-                        class="btn btn-primary"
-                        style="background: black"
+                        class="btn btn-dark"
+                        id="send-button"
                       >
                         Submit
                       </button>
@@ -616,64 +614,95 @@ Some text
         }
       });
 
-      // $("#careerForm").on("submit", function (e) {
-      //   e.preventDefault();
-      //   console.log("something;");
-      //   const firstName = document.getElementById("first-name").value;
-      //   const lastName = document.getElementById("last-name").value;
-      //   const city = document.getElementById("city").value;
-      //   const state = document.getElementById("state").value;
-      //   const adhaar = document.getElementById("adhaar").value;
-      //   const email = document.getElementById("email").value;
-      //   const message = document.getElementById("message").value;
-      //   const file = document.getElementById("file").files[0];
+      $("#careerForm").on("submit", async function (e) {
+        e.preventDefault();
+        $("#send-button").removeClass("btn-dark");
+        $("#send-button").addClass("btn-info");
+        $("#send-button").text("Sumitting...");
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const city = document.getElementById("city").value;
+        const state = document.getElementById("state").value;
+        const adhaar = document.getElementById("adhaar").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+        const file = document.getElementById("file").files[0];
 
-      //   const fileUrl = '';
+        // Upload file to get file url
 
-      //   // Upload file to get file url
+        try {
+          console.log(file);
+          const fileBody = {
+            fileType: "doc",
+            fileExtension: file.name.split(".").pop(),
+            fileName: file.name,
+          };
+          $("#send-button").text("Uploading Resume...");
+          const fileRes = await axios.post(
+            "https://app.fwc.co.in/api/file/form",
+            fileBody
+          );
 
-      //   const body = {firstName, lastName, city, state, adhaar, email, message, fileUrl};
-      //   try {
-      //     const response = await axios.post(
-      //       "https://app.fwc.co.in/api/landing/careers",
-      //       body
-      //     );
-      //     if (response.status === 200) {
-      //       $("#send-button").removeClass("btn-info");
-      //       $("#send-button").text("Successfully Sent");
-      //       $("#send-button").addClass("btn-success");
-      //     } else {
-      //       $("#send-button").removeClass("btn-info");
-      //       $("#send-button").text("Error, try later");
-      //       $("#send-button").addClass("btn-danger");
-      //     }
-      //   } catch (e) {
-      //     $("#send-button").removeClass("btn-info");
-      //     $("#send-button").text("Server Error");
-      //     $("#send-button").addClass("btn-danger");
-      //   }
-      //   clearInput();
+          const { url, fileKey } = fileRes.data;
+          console.log(url, fileKey, fileRes.data);
+          const fileUrl = fileKey;
 
-      //   const timer = setTimeout(() => {
-      //     $("#send-button").removeClass("btn-danger");
-      //     $("#send-button").removeClass("btn-success");
-      //     $("#send-button").text("Send Message");
-      //     $("#send-button").addClass("btn-dark");
-      //     document.getElementById("send-button").disabled = false;
-      //     clearTimeout(timer);
-      //   }, 3000);
-      // });
+          const formData = new FormData();
+          formData.append("file", file);
+          await axios.put(url, formData);
 
-      // const clearInput = () => {
-      //  document.getElementById("first-name").value = '';
-      //  document.getElementById("last-name").value = '';
-      //  document.getElementById("city").value = '';
-      //  document.getElementById("state").value = '';
-      //  document.getElementById("adhaar").value = '';
-      //  document.getElementById("email").value = '';
-      //  document.getElementById("message").value = '';
-      //  document.getElementById("file").value = '';
-      // };
+          const body = {
+            firstName,
+            lastName,
+            city,
+            state,
+            adhaar,
+            email,
+            message,
+            fileUrl,
+          };
+
+          $("#send-button").text("Submitting...");
+          const response = await axios.post(
+            "https://app.fwc.co.in/api/landing/careers",
+            body
+          );
+          if (response.status === 200) {
+            $("#send-button").removeClass("btn-info");
+            $("#send-button").text("Successfully Sent");
+            $("#send-button").addClass("btn-success");
+          } else {
+            $("#send-button").removeClass("btn-info");
+            $("#send-button").text("Error, try later");
+            $("#send-button").addClass("btn-danger");
+          }
+        } catch (e) {
+          $("#send-button").removeClass("btn-info");
+          $("#send-button").text("Server Error");
+          $("#send-button").addClass("btn-danger");
+        }
+        clearInput();
+
+        const timer = setTimeout(() => {
+          $("#send-button").removeClass("btn-danger");
+          $("#send-button").removeClass("btn-success");
+          $("#send-button").text("Submit");
+          $("#send-button").addClass("btn-dark");
+          document.getElementById("send-button").disabled = false;
+          clearTimeout(timer);
+        }, 3000);
+      });
+
+      const clearInput = () => {
+        document.getElementById("first-name").value = "";
+        document.getElementById("last-name").value = "";
+        document.getElementById("city").value = "";
+        document.getElementById("state").value = "";
+        document.getElementById("adhaar").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("message").value = "";
+        document.getElementById("file").value = "";
+      };
 
       const openModal = (id) => {
         const jobs = response.data.data;
