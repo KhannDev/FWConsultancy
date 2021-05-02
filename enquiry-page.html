@@ -109,12 +109,7 @@
               </ul>
             </li>
             <li>
-              <a
-                href="http://fwconboarding-env.eba-s2iktffe.ap-south-1.elasticbeanstalk.com/login"
-                target="_blank"
-              >
-                LOGIN</a
-              >
+              <a href="app.fwc.co.in" target="_blank"> LOGIN</a>
             </li>
           </ul>
         </nav>
@@ -394,20 +389,20 @@
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script>
-      $("#enquiryForm").on("submit", async function (e) {
+      $('#enquiryForm').on('submit', async function (e) {
         e.preventDefault();
-        document.getElementById("send-button").disabled = true;
-        $("#send-button").removeClass("btn-dark");
-        $("#send-button").text("Sending...");
-        $("#send-button").addClass("btn-info");
-        const firstName = document.getElementById("first-name").value;
-        const lastName = document.getElementById("last-name").value;
-        const email = document.getElementById("email").value;
-        const phone = document.getElementById("phone").value;
-        const company = document.getElementById("company").value;
-        const city = document.getElementById("city").value;
-        const message = document.getElementById("message").value;
-        const state = document.getElementById("state").value;
+        document.getElementById('send-button').disabled = true;
+        $('#send-button').removeClass('btn-dark');
+        $('#send-button').text('Sending...');
+        $('#send-button').addClass('btn-info');
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const company = document.getElementById('company').value;
+        const city = document.getElementById('city').value;
+        const message = document.getElementById('message').value;
+        const state = document.getElementById('state').value;
 
         const body = {
           firstName,
@@ -421,44 +416,44 @@
         };
         try {
           const response = await axios.post(
-            "https://app.fwc.co.in/api/landing/enquiries",
+            'https://app.fwc.co.in/api/landing/enquiries',
             body
           );
           if (response.status === 200) {
-            $("#send-button").removeClass("btn-info");
-            $("#send-button").text("Successfully Sent");
-            $("#send-button").addClass("btn-success");
+            $('#send-button').removeClass('btn-info');
+            $('#send-button').text('Successfully Sent');
+            $('#send-button').addClass('btn-success');
           } else {
-            $("#send-button").removeClass("btn-info");
-            $("#send-button").text("Error, try later");
-            $("#send-button").addClass("btn-danger");
+            $('#send-button').removeClass('btn-info');
+            $('#send-button').text('Error, try later');
+            $('#send-button').addClass('btn-danger');
           }
         } catch (e) {
-          $("#send-button").removeClass("btn-info");
-          $("#send-button").text("Server Error");
-          $("#send-button").addClass("btn-danger");
+          $('#send-button').removeClass('btn-info');
+          $('#send-button').text('Server Error');
+          $('#send-button').addClass('btn-danger');
         }
         clearInput();
 
         const timer = setTimeout(() => {
-          $("#send-button").removeClass("btn-danger");
-          $("#send-button").removeClass("btn-success");
-          $("#send-button").text("Send Message");
-          $("#send-button").addClass("btn-dark");
-          document.getElementById("send-button").disabled = false;
+          $('#send-button').removeClass('btn-danger');
+          $('#send-button').removeClass('btn-success');
+          $('#send-button').text('Send Message');
+          $('#send-button').addClass('btn-dark');
+          document.getElementById('send-button').disabled = false;
           clearTimeout(timer);
         }, 3000);
       });
 
       const clearInput = () => {
-        document.getElementById("first-name").value = "";
-        document.getElementById("last-name").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("phone").value = "";
-        document.getElementById("company").value = "";
-        document.getElementById("city").value = "";
-        document.getElementById("message").value = "";
-        document.getElementById("state").value = "";
+        document.getElementById('first-name').value = '';
+        document.getElementById('last-name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('phone').value = '';
+        document.getElementById('company').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('message').value = '';
+        document.getElementById('state').value = '';
       };
     </script>
   </body>

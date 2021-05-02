@@ -106,12 +106,7 @@
               </ul>
             </li>
             <li>
-              <a
-                href="http://fwconboarding-env.eba-s2iktffe.ap-south-1.elasticbeanstalk.com/login"
-                target="_blank"
-              >
-                LOGIN</a
-              >
+              <a href="app.fwc.co.in" target="_blank"> LOGIN</a>
             </li>
           </ul>
         </nav>
@@ -524,11 +519,11 @@
     <!-- Vendor JS Files -->
     <script>
       // Add the following code if you want the name of the file appear on select
-      $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
+      $('.custom-file-input').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
         $(this)
-          .siblings(".custom-file-label")
-          .addClass("selected")
+          .siblings('.custom-file-label')
+          .addClass('selected')
           .html(fileName);
       });
     </script>
@@ -554,7 +549,7 @@
 
       $(document).ready(async function () {
         try {
-          response = await axios.get("https://app.fwc.co.in/api/job-posting");
+          response = await axios.get('https://app.fwc.co.in/api/job-posting');
           if (response && response.data && response.data.data.length > 0) {
             // const jobs = [
             //   response.data.data[0],
@@ -562,7 +557,7 @@
             //   response.data.data[0],
             // ];
             const jobs = response.data.data;
-            let innerHtmlData = "";
+            let innerHtmlData = '';
 
             jobs.map((job) => {
               const html = `<div class="media border rounded-lg p-2 mt-2" onclick="openModal('${
@@ -583,7 +578,7 @@
                         }</p>
                         <p class="text-muted">Posted on: ${new Date(
                           job.createdAt
-                        ).toLocaleDateString("en-US")}</p>
+                        ).toLocaleDateString('en-US')}</p>
                         <p class="mb-0 text-dark">${job.shortDescription}</p>
                       </div>
                       <div class="col-lg-3 align-items-center d-flex flex-column justify-content-center">
@@ -601,45 +596,45 @@
               innerHtmlData += html;
             });
 
-            $("#featured-jobs").after(innerHtmlData);
+            $('#featured-jobs').after(innerHtmlData);
           } else {
             innerHtmlData = `<h4>Currently there are no job listings.</h4>`;
-            console.log("There is no data");
-            $("#featured-jobs").after(innerHtmlData);
+            console.log('There is no data');
+            $('#featured-jobs').after(innerHtmlData);
           }
         } catch (e) {
           innerHtmlData = `<h4>Server Error, try again later.</h4>`;
-          console.log("Something wrong with server.");
-          $("#featured-jobs").after(innerHtmlData);
+          console.log('Something wrong with server.');
+          $('#featured-jobs').after(innerHtmlData);
         }
       });
 
-      $("#careerForm").on("submit", async function (e) {
+      $('#careerForm').on('submit', async function (e) {
         e.preventDefault();
-        $("#send-button").removeClass("btn-dark");
-        $("#send-button").addClass("btn-info");
-        $("#send-button").text("Sumitting...");
-        const firstName = document.getElementById("first-name").value;
-        const lastName = document.getElementById("last-name").value;
-        const city = document.getElementById("city").value;
-        const state = document.getElementById("state").value;
-        const adhaar = document.getElementById("adhaar").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-        const file = document.getElementById("file").files[0];
+        $('#send-button').removeClass('btn-dark');
+        $('#send-button').addClass('btn-info');
+        $('#send-button').text('Sumitting...');
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const adhaar = document.getElementById('adhaar').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        const file = document.getElementById('file').files[0];
 
         // Upload file to get file url
 
         try {
           console.log(file);
           const fileBody = {
-            fileType: "doc",
-            fileExtension: file.name.split(".").pop(),
+            fileType: 'doc',
+            fileExtension: file.name.split('.').pop(),
             fileName: file.name,
           };
-          $("#send-button").text("Uploading Resume...");
+          $('#send-button').text('Uploading Resume...');
           const fileRes = await axios.post(
-            "https://app.fwc.co.in/api/file/form",
+            'https://app.fwc.co.in/api/file/form',
             fileBody
           );
 
@@ -648,7 +643,7 @@
           const fileUrl = fileKey;
 
           const formData = new FormData();
-          formData.append("file", file);
+          formData.append('file', file);
           await axios.put(url, formData);
 
           const body = {
@@ -662,66 +657,66 @@
             fileUrl,
           };
 
-          $("#send-button").text("Submitting...");
+          $('#send-button').text('Submitting...');
           const response = await axios.post(
-            "https://app.fwc.co.in/api/landing/careers",
+            'https://app.fwc.co.in/api/landing/careers',
             body
           );
           if (response.status === 200) {
-            $("#send-button").removeClass("btn-info");
-            $("#send-button").text("Successfully Sent");
-            $("#send-button").addClass("btn-success");
+            $('#send-button').removeClass('btn-info');
+            $('#send-button').text('Successfully Sent');
+            $('#send-button').addClass('btn-success');
           } else {
-            $("#send-button").removeClass("btn-info");
-            $("#send-button").text("Error, try later");
-            $("#send-button").addClass("btn-danger");
+            $('#send-button').removeClass('btn-info');
+            $('#send-button').text('Error, try later');
+            $('#send-button').addClass('btn-danger');
           }
         } catch (e) {
-          $("#send-button").removeClass("btn-info");
-          $("#send-button").text("Server Error");
-          $("#send-button").addClass("btn-danger");
+          $('#send-button').removeClass('btn-info');
+          $('#send-button').text('Server Error');
+          $('#send-button').addClass('btn-danger');
         }
         clearInput();
 
         const timer = setTimeout(() => {
-          $("#send-button").removeClass("btn-danger");
-          $("#send-button").removeClass("btn-success");
-          $("#send-button").text("Submit");
-          $("#send-button").addClass("btn-dark");
-          document.getElementById("send-button").disabled = false;
+          $('#send-button').removeClass('btn-danger');
+          $('#send-button').removeClass('btn-success');
+          $('#send-button').text('Submit');
+          $('#send-button').addClass('btn-dark');
+          document.getElementById('send-button').disabled = false;
           clearTimeout(timer);
         }, 3000);
       });
 
       const clearInput = () => {
-        document.getElementById("first-name").value = "";
-        document.getElementById("last-name").value = "";
-        document.getElementById("city").value = "";
-        document.getElementById("state").value = "";
-        document.getElementById("adhaar").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("message").value = "";
-        document.getElementById("file").value = "";
+        document.getElementById('first-name').value = '';
+        document.getElementById('last-name').value = '';
+        document.getElementById('city').value = '';
+        document.getElementById('state').value = '';
+        document.getElementById('adhaar').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+        document.getElementById('file').value = '';
       };
 
       const openModal = (id) => {
         const jobs = response.data.data;
         const currentJob = jobs.find((job) => job._id === id);
         // console.log(currentJob);
-        $("#jobPostingTitle").text(currentJob.title);
-        $("#jobPostingImage").attr("src", currentJob.imageUrl);
-        $("#jobPostingLocation").text(currentJob.location);
-        $("#jobPostingDate").html(
-          new Date(currentJob.createdAt).toLocaleDateString("en-US")
+        $('#jobPostingTitle').text(currentJob.title);
+        $('#jobPostingImage').attr('src', currentJob.imageUrl);
+        $('#jobPostingLocation').text(currentJob.location);
+        $('#jobPostingDate').html(
+          new Date(currentJob.createdAt).toLocaleDateString('en-US')
         );
-        $("#jobPostingDetailedDesc").text(currentJob.longDescription);
-        $("#jobPostingExperience").text(currentJob.experience);
-        $("#jobPostingShift").text(currentJob.shiftType);
-        $("#jobPostingModal").modal("show");
+        $('#jobPostingDetailedDesc').text(currentJob.longDescription);
+        $('#jobPostingExperience').text(currentJob.experience);
+        $('#jobPostingShift').text(currentJob.shiftType);
+        $('#jobPostingModal').modal('show');
       };
 
       const focusFirstInput = () => {
-        $("#first-name").focus();
+        $('#first-name').focus();
       };
     </script>
   </body>
